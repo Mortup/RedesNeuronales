@@ -35,6 +35,7 @@ class Network:
 perc_or = Perceptron([1,1],-0.5)
 perc_and = Perceptron([1,1],-1.5)
 perc_nand = Perceptron([-2,-2],3)
+perc_not = Perceptron([-1], 0.5)
 
 # Test unitarios
 # OR
@@ -54,6 +55,10 @@ assert perc_nand.feed([0,0])
 assert perc_nand.feed([0,1])
 assert perc_nand.feed([1,0])
 assert not perc_nand.feed([1,1])
+
+# OR
+assert perc_not.feed([0])
+assert not perc_not.feed([1])
 
 # Red sumadora
 x1_p = Perceptron([1, 0], -0.5)
