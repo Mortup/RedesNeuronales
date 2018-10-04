@@ -52,7 +52,7 @@ def train(perc, n):
     
 
 
-def plot_after_train(n):
+def plot_after_train(n, ax):
     rand_x = (random.random() * 2) - 1
     rand_y = (random.random() * 2) - 1
     rand_b = (random.random() * 2) - 1
@@ -60,17 +60,22 @@ def plot_after_train(n):
 
     train(p,n)
 
-    for i in range(1000):
+    for i in range(500):
         plot_x = (random.random() * 100) - 50
         plot_y = (random.random() * 240) - 120
         if p.feed((plot_x, plot_y)) > 0.5:
-            plt.plot(plot_x, plot_y, 'ro')
+            ax.plot(plot_x, plot_y, 'ro')
         else:
-            plt.plot(plot_x, plot_y, 'bo')
+            ax.plot(plot_x, plot_y, 'bo')
 
-    plt.plot([-50, 50], [line_func(-50), line_func(50)], 'k--')
+    ax.set_title("After " + str(n) + " training sets.")
+    ax.plot([-50, 50], [line_func(-50), line_func(50)], 'k--')
 
-plot_after_train(10000)
+f, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, sharex='col', sharey='row')
+plot_after_train(5, ax1)
+plot_after_train(50, ax2)
+plot_after_train(500, ax3)
+plot_after_train(5000, ax4)
 
 plt.show()
 rand_x = (random.random() * 2) - 1
