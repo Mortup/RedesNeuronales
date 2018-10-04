@@ -58,7 +58,7 @@ def plot_after_train(n):
     rand_b = (random.random() * 2) - 1
     p = Perceptron([rand_x, rand_y], rand_b)
 
-    train(p,10)
+    train(p,n)
 
     for i in range(1000):
         plot_x = (random.random() * 100) - 50
@@ -70,7 +70,7 @@ def plot_after_train(n):
 
     plt.plot([-50, 50], [line_func(-50), line_func(50)], 'k--')
 
-plot_after_train(100)
+plot_after_train(10000)
 
 plt.show()
 rand_x = (random.random() * 2) - 1
