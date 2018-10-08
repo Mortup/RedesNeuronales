@@ -21,17 +21,17 @@ class Perceptron:
         
         return 1
 
-def line_func(x):
-    return 1.7*x + 7
+def xor_f(x,y):
+    return x != y
 
 def train(perc, n):
     while n > 0:
-        x = (random.random() * 100) - 50
-        y = (random.random() * 240) - 120
+        x = random.randint(0,1)
+        y = random.randint(0,1)
 
         current_input = [x,y]
 
-        if y > line_func(x):
+        if not xor_f(x,y):
             desired_out = 0
         else:
             desired_out = 1
@@ -59,15 +59,14 @@ def plot_after_train(n, ax):
     train(p,n)
 
     for i in range(500):
-        plot_x = (random.random() * 100) - 50
-        plot_y = (random.random() * 240) - 120
+        plot_x = random.randint(0,1)
+        plot_y = random.randint(0,1)
         if p.feed((plot_x, plot_y)) > 0.5:
             ax.plot(plot_x, plot_y, 'ro')
         else:
             ax.plot(plot_x, plot_y, 'bo')
 
     ax.set_title("After " + str(n) + " training sets.")
-    ax.plot([-50, 50], [line_func(-50), line_func(50)], 'k--')
 
 def error_after_train(n):
     rand_x = (random.random() * 2) - 1
@@ -80,8 +79,8 @@ def error_after_train(n):
     test_pool_size = 2000
     puntos_aleatorios = []
     for i in range(test_pool_size):
-        plot_x = (random.random() * 100) - 50
-        plot_y = (random.random() * 240) - 120
+        plot_x = random.randint(0,1)
+        plot_y = random.randint(0,1)
         puntos_aleatorios.append((plot_x, plot_y))
 
     for i in range(n):
@@ -91,7 +90,7 @@ def error_after_train(n):
         for j in range(test_pool_size):
             plot_x = puntos_aleatorios[j][0]
             plot_y = puntos_aleatorios[j][1]
-            if (p.feed((plot_x, plot_y)) >  0.5) != (line_func(plot_x) > plot_y):
+            if (p.feed((plot_x, plot_y)) >  0.5) != (xor_f(plot_x, plot_y)):
                 ronda_error += 1
 
         errores.append(1 - (float(ronda_error)/test_pool_size))
@@ -109,4 +108,4 @@ plot_after_train(500, ax3)
 plot_after_train(5000, ax4)
 
 plt.show()
-error_after_train(100000)
+error_after_train(1000)
