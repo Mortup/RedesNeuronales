@@ -1,3 +1,5 @@
+import math
+
 import unittest
 
 import neurons
@@ -81,7 +83,18 @@ class TestPerceptronMethods(unittest.TestCase):
         self.assertEqual(p_not.feed([1]),0)
 
 class TestSigmoidMethods(unittest.TestCase):
-    pass
+
+    def test_neutral_sigmoid(self):
+        sigmoid = neurons.Sigmoid([0,0,0],1)
+        self.assertEqual(sigmoid.feed([0,0,0]),0.5)
+        self.assertEqual(sigmoid.feed([1,1,1]),0.5)
+        self.assertEqual(sigmoid.feed([42,420,1]),0.5)
+
+    def test_sigmoid_result(self):
+        sigmoid = neurons.Sigmoid([1,2,3],1)
+        self.assertEqual(sigmoid.feed([0,0,0]),0.5)
+        self.assertEqual(sigmoid.feed([1,0,0]),float(1)/(1+math.exp(1)))
+        self.assertEqual(sigmoid.feed([10,20,5]),float(1)/(1+math.exp(65)))
 
 if __name__ == '__main__':
     unittest.main()

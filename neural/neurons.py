@@ -1,5 +1,6 @@
 # Libreria de utilidades basicas para Redes Neuronales
 # @author: Gonzalo Uribe
+import math
 
 class Neuron:
     def __init__(self, weights, bias):
