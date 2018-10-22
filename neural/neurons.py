@@ -22,9 +22,9 @@ class Perceptron(Neuron):
         res = self.get_raw_feed(inputs)
 
         if res + self.bias > 0:
-            return 0
+            return 1
 
-        return 1
+        return 0
 
 # Sigmoid
 class Sigmoid(Perceptron):
