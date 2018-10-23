@@ -6,6 +6,9 @@ class Neuron:
     def __init__(self, weights, bias):
         self.weights = weights
         self.bias = bias
+        self.last_output = 0
+        self.last_error = 0
+        self.last_delta = 0
 
     def get_raw_feed(self, inputs):
         assert len(inputs) == len(self.weights)
@@ -23,8 +26,10 @@ class Perceptron(Neuron):
         res = self.get_raw_feed(inputs)
 
         if res + self.bias > 0:
+            self.last_output = 1
             return 1
 
+        self.last_output = 0
         return 0
 
 # Sigmoid
@@ -33,5 +38,6 @@ class Sigmoid(Perceptron):
     def feed(self, inputs):
         res = self.get_raw_feed(inputs)
 
-        return float(1)/(1+math.exp(res))
+        self.last_output = float(1)/(1+math.exp(-res-self.bias))
+        return float(1)/(1+math.exp(-res-self.bias))
 
