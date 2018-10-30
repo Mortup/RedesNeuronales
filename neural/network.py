@@ -1,6 +1,7 @@
 # Implementacion de Redes Neuronales
 # @author: Gonzalo Uribe
 
+from progressbar import showProgress
 import neurons as nrs
 
 learningRate = 0.5
@@ -111,6 +112,15 @@ class Network:
         self.firstLayer = self.layers[0]
         self.lastLayer = self.layers[-1]
 
+    def epoch(self, inputs, expectedOutputs):
+        """Trains the network with the given inputs and
+        expected outputs"""
+        assert len(inputs) == len(expectedOutputs)
+
+        for i in range(len(inputs)):
+            self.train(inputs[i], expectedOutputs[i])
+
+
     def feed(self, inputs):
         """Feed the first layer with the provided inputs"""
         return self.firstLayer.feed(inputs)
@@ -133,11 +143,11 @@ class Network:
 
 
 n = Network(2, [2,3,3,2])
-for i in xrange(100000):
-    n.train([0,0], [0,1])
-    n.train([1,0], [1,0])
-    n.train([0,1], [1,0])
-    n.train([1,1], [0,1])
+nEpochs = 100000
+for i in xrange(nEpochs):
+    n.epoch([[0,0],[1,0],[0,1],[1,1]],[[0,1],[1,0],[1,0],[0,1]])
+    showProgress(i,nEpochs,"Entrenando Red")
+print("\nEntrenamiento terminado!")
 
 print(n.feed([0,0]))
 print(n.feed([0,1]))
