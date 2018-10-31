@@ -117,8 +117,12 @@ class Network:
         expected outputs"""
         assert len(inputs) == len(expectedOutputs)
 
+        error = 0
+
         for i in range(len(inputs)):
-            self.train(inputs[i], expectedOutputs[i])
+            error += self.train(inputs[i], expectedOutputs[i])
+
+        return error
 
 
     def feed(self, inputs):
@@ -132,6 +136,12 @@ class Network:
         outputs = self.feed(inputs)
         self.backwardPropagateError(expectedOutputs)
         self.updateWeights(inputs)
+
+        error = 0
+        for i in range(len(expectedOutputs)):
+            error += abs(expectedOutputs[i] - outputs[i])
+
+        return error
 
     def backwardPropagateError(self, expected):
         self.lastLayer.backwardPropagateError(expected)

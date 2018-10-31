@@ -1,3 +1,5 @@
+import matplotlib.pyplot as plt
+
 from progressbar import showProgress
 from network import Network
 
@@ -52,13 +54,19 @@ if __name__ == "__main__":
     training_set = [normalize_dataset(raw_dataset[0]), raw_dataset[1]]
 
     n = Network(13, [7,5,5,3])
-    nEpochs = 10000
+    nEpochs = 100000
+
+    errores = []
 
     for i in xrange(nEpochs):
-        n.epoch(training_set[0], training_set[1])
+        error = n.epoch(training_set[0], training_set[1])
+        errores.append(error)
         showProgress(i, nEpochs)
     print("\nEntrenamiento terminado!")
 
     print(n.feed(normalize_dataset(raw_dataset[0])[2]))
     print(n.feed(normalize_dataset(raw_dataset[0])[103]))
     print(n.feed(normalize_dataset(raw_dataset[0])[161]))
+
+    plt.plot(range(nEpochs), errores)
+    plt.show()
