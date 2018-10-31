@@ -67,7 +67,7 @@ if __name__ == "__main__":
         precitions.append([])
         recalls.append([])
 
-    for i in xrange(nEpochs):
+    for i in range(nEpochs):
         error = n.epoch(training_set[0], training_set[1])
         errores.append(error)
 
