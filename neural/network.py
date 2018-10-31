@@ -4,7 +4,7 @@
 from progressbar import showProgress
 import neurons as nrs
 
-learningRate = 0.5
+learningRate = 0.01
 
 class Layer:
     def __init__(self, nNeurons, nInputs):
@@ -111,6 +111,52 @@ class Network:
         # Save the first and last layers.
         self.firstLayer = self.layers[0]
         self.lastLayer = self.layers[-1]
+
+    def epoch_precition(self, inputs, expectedOutputs):
+        output_length = len(expectedOutputs[0])
+        true_positives = [0]*output_length
+        false_positives = [0]*output_length
+
+        for i in range(len(inputs)):
+            net_guess = self.feed(inputs[i])
+            for j in range(len(net_guess)):
+                if net_guess[j] > 0.9:
+                    if expectedOutputs[i][j] <= 0.9:
+                        false_positives[j] += 1
+                    else:
+                        true_positives[j] += 1
+
+        result = []
+        for i in range(len(true_positives)):
+            if true_positives[i]+false_positives[i] == 0:
+                result.append(0)
+            else:
+                result.append(float(true_positives[i]) / (true_positives[i]+false_positives[i]))
+        return result
+
+    def epoch_recall(self, inputs, expectedOutputs):
+        output_length = len(expectedOutputs[0])
+        true_positives = [0]*output_length
+        relevant_elements = [0]*output_length
+
+        for i in range(len(inputs)):
+            net_guess = self.feed(inputs[i])
+            for j in range(len(net_guess)):
+                if expectedOutputs[i][j] > 0.9:
+                    relevant_elements[j] += 1
+                    if net_guess[j] > 0.9:
+                        true_positives[j] += 1
+
+        result = []
+        for i in range(len(true_positives)):
+            if relevant_elements[i] == 0:
+                result.append(0)
+            else:
+                result.append(float(true_positives[i]) / relevant_elements[i])
+        return result
+
+
+
 
     def epoch(self, inputs, expectedOutputs):
         """Trains the network with the given inputs and

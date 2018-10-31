@@ -1,3 +1,5 @@
+import sys
+
 import matplotlib.pyplot as plt
 
 from progressbar import showProgress
@@ -54,19 +56,43 @@ if __name__ == "__main__":
     training_set = [normalize_dataset(raw_dataset[0]), raw_dataset[1]]
 
     n = Network(13, [7,5,5,3])
-    nEpochs = 100000
+    nEpochs = int(sys.argv[1])
 
     errores = []
+    # TODO: precitions and recall won't be allways a 3 choose selection
+    outputs_length = len(raw_dataset[1][0])
+    precitions = []
+    recalls = []
+    for i in range(outputs_length):
+        precitions.append([])
+        recalls.append([])
 
     for i in xrange(nEpochs):
         error = n.epoch(training_set[0], training_set[1])
         errores.append(error)
+
+        precition = n.epoch_precition(training_set[0], training_set[1])
+        precitions[0].append(precition[0])
+        precitions[1].append(precition[1])
+        precitions[2].append(precition[2])
+
+        recall = n.epoch_recall(training_set[0], training_set[1])
+        recalls[0].append(recall[0])
+        recalls[1].append(recall[1])
+        recalls[2].append(recall[2])
+
         showProgress(i, nEpochs)
     print("\nEntrenamiento terminado!")
 
-    print(n.feed(normalize_dataset(raw_dataset[0])[2]))
-    print(n.feed(normalize_dataset(raw_dataset[0])[103]))
-    print(n.feed(normalize_dataset(raw_dataset[0])[161]))
-
     plt.plot(range(nEpochs), errores)
+    plt.show()
+
+    plt.plot(range(nEpochs), precitions[0],'b')
+    plt.plot(range(nEpochs), precitions[1],'r')
+    plt.plot(range(nEpochs), precitions[2],'g')
+    plt.show()
+
+    plt.plot(range(nEpochs),recalls[0],'b')
+    plt.plot(range(nEpochs),recalls[1],'r')
+    plt.plot(range(nEpochs),recalls[2],'g')
     plt.show()
