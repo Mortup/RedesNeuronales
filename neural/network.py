@@ -140,16 +140,3 @@ class Network:
         """Update the weights of the neurons using the
         initial inputs"""
         self.firstLayer.updateWeight(initialInputs)
-
-
-n = Network(2, [2,3,3,2])
-nEpochs = 100000
-for i in xrange(nEpochs):
-    n.epoch([[0,0],[1,0],[0,1],[1,1]],[[0,1],[1,0],[1,0],[0,1]])
-    showProgress(i,nEpochs,"Entrenando Red")
-print("\nEntrenamiento terminado!")
-
-print(n.feed([0,0]))
-print(n.feed([0,1]))
-print(n.feed([1,0]))
-print(n.feed([1,1]))
