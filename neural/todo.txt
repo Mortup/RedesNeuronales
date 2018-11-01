@@ -1,0 +1,13 @@
+-Unit testing
+-30% not for learning but for precision test
+
+Informe con:
+-Descripción del dataset
+-Como correr el programa
+
+-Impacto del numero de hidden layers
+-Velocidad (tiempo) en procesar de la net
+-Efecto de learning rates
+-Orden del training data?
+
+BONUS: Que neuronas cambian mas?
