@@ -1,21 +1,27 @@
-# Libreria de utilidades basicas para Redes Neuronales
+# Modulo con neuronas para Redes Neuronales.
 # @author: Gonzalo Uribe
 import math
 import random
 
-minWeight = -1
+#For generating random weights
+minWeight = -1 
 maxWeight = 1
 
-minBias = -0.35
-maxBias = 0.35
+#For generating random bias
+minBias = -0.3
+maxBias = 0.7
 
 def random_weights(n):
+    """Generates n random weights between the 
+    range stablished on this module"""
     res = []
     for i in range(n):
         res.append(random.uniform(minWeight, maxWeight))
     return res
 
 def random_bias():
+    """Generates a random bias between the
+    range stablished on this module"""
     return random.uniform(minBias, maxBias)
 
 def transfer_derivative(output):

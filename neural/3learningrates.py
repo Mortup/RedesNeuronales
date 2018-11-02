@@ -85,9 +85,9 @@ if __name__ == "__main__":
 
     # Create the network
     random.seed(9001)
-    n = Network(13, [7,3])
+    n = Network(13, [7,5,5,3])
     nEpochs = int(sys.argv[1])
-    network.learningRate = 0.05
+    network.learningRate = 0.01
     
     for i in range(nEpochs):
         error = n.epoch(training_set[0], training_set[1])
@@ -98,8 +98,9 @@ if __name__ == "__main__":
     print("")
     # Create the network
     random.seed(9001)
-    n = Network(13, [7,5,5,5,3])
+    n = Network(13, [7,5,5,3])
     nEpochs = int(sys.argv[1])
+    network.learningRate = 0.1
     
     for i in range(nEpochs):
         error = n.epoch(training_set[0], training_set[1])
@@ -110,8 +111,9 @@ if __name__ == "__main__":
     print("")
     # Create the network
     random.seed(9001)
-    n = Network(13, [7,5,5,5,5,5,5,5,5,3])
+    n = Network(13, [7,5,5,3])
     nEpochs = int(sys.argv[1])
+    network.learningRate = 0.5
     
     for i in range(nEpochs):
         error = n.epoch(training_set[0], training_set[1])
@@ -134,8 +136,8 @@ if __name__ == "__main__":
     ax1.plot(range(nEpochs), errores1)
     ax2.plot(range(nEpochs), errores2)
     ax3.plot(range(nEpochs), errores3)
-    ax1.set_title('Sin capas ocultas')
-    ax2.set_title('Tres capas ocultas')
-    ax3.set_title('Ocho capas ocultas')
+    ax1.set_title('Learning Rate = 0.01')
+    ax2.set_title('Learning Rate = 0.1')
+    ax3.set_title('Learning Rate = 0.5')
     
     plt.show()

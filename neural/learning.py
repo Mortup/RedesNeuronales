@@ -77,65 +77,33 @@ if __name__ == "__main__":
     training_set = [norm_data[0][0:limit_index], norm_data[1][0:limit_index]]
     testing_set = [norm_data[0][limit_index:], norm_data[1][limit_index:]]
 
+    # Create the network
+    nEpochs = int(sys.argv[1])
 
     # Make the graph
-    errores1 = []
-    errores2 = []
-    errores3 = []
+    lrs = []
+    total_iters = []
 
-    # Create the network
-    random.seed(9001)
-    n = Network(13, [7,3])
-    nEpochs = int(sys.argv[1])
-    network.learningRate = 0.05
-    
-    for i in range(nEpochs):
-        error = n.epoch(training_set[0], training_set[1])
-        errores1.append(error)
+    for i in range(20):
+        network.learningRate = 0.01 + (0.05*i)
+        random.seed(9001)
+        n = Network(13, [7,5,5,3])
+        iters = 0
+        last_error = 100
+        while last_error > 25:
+            last_error = n.epoch(training_set[0], training_set[1])
+            iters += 1
 
-        showProgress(i, nEpochs)
- 
-    print("")
-    # Create the network
-    random.seed(9001)
-    n = Network(13, [7,5,5,5,3])
-    nEpochs = int(sys.argv[1])
-    
-    for i in range(nEpochs):
-        error = n.epoch(training_set[0], training_set[1])
-        errores2.append(error)
-
-        showProgress(i, nEpochs)
-
-    print("")
-    # Create the network
-    random.seed(9001)
-    n = Network(13, [7,5,5,5,5,5,5,5,5,3])
-    nEpochs = int(sys.argv[1])
-    
-    for i in range(nEpochs):
-        error = n.epoch(training_set[0], training_set[1])
-        errores3.append(error)
-
-        showProgress(i, nEpochs)
-
+        print(i, iters)
+        print(network.learningRate)
+        lrs.append(network.learningRate)
+        total_iters.append(iters)
     print("\nEntrenamiento terminado!")
 
-    f, (ax1, ax2, ax3) = plt.subplots(3, sharex=True)
-    f.subplots_adjust(hspace=0.65)
-    ax1.set_xlabel("Epochs")
-    ax2.set_xlabel("Epochs")
-    ax3.set_xlabel("Epochs")
-    ax1.set_ylim([0,250])
-    ax2.set_ylim([0,250])
-    ax3.set_ylim([0,250])
-
-    # Error graph
-    ax1.plot(range(nEpochs), errores1)
-    ax2.plot(range(nEpochs), errores2)
-    ax3.plot(range(nEpochs), errores3)
-    ax1.set_title('Sin capas ocultas')
-    ax2.set_title('Tres capas ocultas')
-    ax3.set_title('Ocho capas ocultas')
+    f, ax = plt.subplots()
+    ax.plot(lrs, total_iters)
+    ax.set_xlabel('Learning rate')
+    ax.set_ylabel('Epochs')
+    ax.set_title('Iteraciones necesarias para converger')
     
     plt.show()
