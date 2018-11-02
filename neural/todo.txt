@@ -1,5 +1,0 @@
--Unit testing
--README de que hay en cada cosa
-
-Informe con:
--Como correr el programa
