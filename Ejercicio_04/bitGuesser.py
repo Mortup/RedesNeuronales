@@ -1,5 +1,9 @@
 import random
 
+import selection
+import crossover
+import mutation
+
 def generateRandomBits(n):
     result = ''
     for i in range(n):
@@ -26,20 +30,24 @@ def getFitness(obtained, desired):
 
     return fitness
 
-def selectTopPercent(results, desired, percent):
-    # Evaluate fitness of each element
-    fitnesses = []
-    for i in range(len(results)):
-        fitnesses.append(getFitness(results[i], desired))
+def guessNumber(n):
+    child_length = len(n)
+    population_size = 20
+    top_percent_size = 25
+    mutation_rate = 0.1
 
-    res_and_fit = zip(results, fitnesses)
-    res_and_fit = sorted(res_and_fit, key=lambda x: x[1], reverse=True)
-    top_res_and_fit = res_and_fit[:len(res_and_fit)*percent/100]
-    return top_res_and_fit
+    population = generateStartingPopulation(population_size, child_length)
+    top_percent = selectTopPercent(population, n, top_percent_size)
+    iterations = 0
+    while top_percent[0][0] != n:
+        pool = [x[0] for x in top_percent]
+        c_pool = crossover.generate_childs(5, pool, crossover.uniform)
+        m_pool = mutation.mutate_pool(c_pool,'01',mutation_rate) 
+        top_percent = selectTopPercent(m_pool, n, top_percent_size)
+        iterations += 1
 
-def getCrossedOver(results)
+    print top_percent[0]
+    print iterations
 
-a = generateStartingPopulation(20, 5)
-b = selectTopPercent(a, '11111', 25)
-print(b)
-
+numero = raw_input("Numero: ")
+guessNumber(numero)
