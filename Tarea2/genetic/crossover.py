@@ -1,7 +1,10 @@
+# crossover.py
 # Algoritmos de cross-over
+# @author: Mortup (Gonzalo Uribe)
 
 import random
 
+# Divide s1 y s2 en dos partes y entrega la union.
 def single_point(s1, s2):
     assert len(s1) == len(s2)
     assert len(s1) > 1
@@ -10,6 +13,7 @@ def single_point(s1, s2):
 
     return s1[:p] + s2[p:]
 
+# Agrega una parte de s2 a s1.
 def two_point(s1, s2):
     assert len(s1) == len(s2)
     assert len(s1) > 2
@@ -19,6 +23,8 @@ def two_point(s1, s2):
 
     return s1[:p1] + s2[p1:p2] + s1[p2:]
 
+# Para cada letra se selecciona la de s1 o s2 con 
+# probabilidad uniforme.
 def uniform(s1, s2):
     assert len(s1) == len(s2)
 
@@ -31,6 +37,9 @@ def uniform(s1, s2):
 
     return result
 
+# Genera 'n_childs' hijos con padres seleccionados
+# aleatoreamente desde 'pool' utilizando el metodo
+# de crossover 'method'.
 def generate_childs(n_childs, pool, method):
     result = []
     for i in range(n_childs):
