@@ -4,6 +4,8 @@
 
 import random
 
+import selection
+
 # Divide s1 y s2 en dos partes y entrega la union.
 def single_point(s1, s2):
     assert len(s1) == len(s2)
@@ -43,8 +45,8 @@ def uniform(s1, s2):
 def generate_childs(n_childs, pool, method):
     result = []
     for i in range(n_childs):
-        parent1 = random.choice(pool)
-        parent2 = random.choice(pool)
+        parent1 = selection.tourneament_selection(pool)
+        parent2 = selection.tourneament_selection(pool)
         new_child = method(parent1, parent2)
         result.append(new_child)
 

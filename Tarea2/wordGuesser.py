@@ -35,4 +35,4 @@ while top_percent[0] != n:
     top_percent = selection.top_elements(m_pool, top_percent_size, fitness_func)
     iterations += 1
 
-print "Se ha encontrado la palabra", n, "luego de", iterations, "generaciones."
+print "Se ha encontrado la palabra luego de", iterations, "generaciones."
