@@ -30,12 +30,12 @@ def two_point(s1, s2):
 def uniform(s1, s2):
     assert len(s1) == len(s2)
 
-    result = ""
+    result = []
     for i in range(len(s1)):
         if random.random() > 0.5:
-            result += s1[i]
+            result.append(s1[i])
         else:
-            result += s2[i]
+            result.append(s2[i])
 
     return result
 

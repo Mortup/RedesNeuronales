@@ -10,3 +10,4 @@ Se encuentra en la carpeta tarea1
 Se encuentra en la carpeta tarea2
 * bitGuesser.py adivina un numero binario
 * wordGuesser.py adivina una palabra (puede incluir espacios)
+* nQueen.py encuentra una respuesta al problema de N-Queen

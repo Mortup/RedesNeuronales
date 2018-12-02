@@ -16,9 +16,9 @@ def getFitness(obtained, desired):
 
     return fitness
 
-n = raw_input("Ingrese una palabra: ")
+n = [x for x in raw_input("Ingrese una palabra: ")]
 
-alphabet = 'qwertyuiopasdfghjklzxcvbnm '
+alphabet = [x for x in 'qwertyuiopasdfghjklzxcvbnm ']
 child_length = len(n)
 population_size = 20
 top_percent_size = 5

@@ -13,7 +13,7 @@ def mutate(gen, alphabet):
 
     s = list(gen)
     s[index] = new_symbol
-    return "".join(s)
+    return s
     
 # Aplica mutaciones en cada palabra de 'pool' con
 # probabilidad 'mutation_rate'

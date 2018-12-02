@@ -7,11 +7,11 @@ import random
 # Genera una palabra de largo 'n' con letras
 # de 'alphabet' seleccionadas al azar.
 def generateRandomWord(n, alphabet):
-    result = ''
+    result = []
 
     for i in range(n):
         character = random.choice(alphabet)
-        result += character
+        result.append(character)
 
     return result
 

@@ -3,6 +3,10 @@ import genetic.selection as selection
 import genetic.crossover as crossover
 import genetic.mutation as mutation
 
+import random
+
+random.seed(42) # So long and thanks for all the fish.
+
 def fitness_function_factory(desired):
     return lambda x: getFitness(x, desired)
 
@@ -16,9 +20,12 @@ def getFitness(obtained, desired):
 
     return fitness
 
-n = raw_input("Ingrese un numero binario: ")
+user_n = raw_input("Ingrese un numero binario: ")
+n = []
+for c in user_n:
+    n.append(int(c))
 
-alphabet = '01'
+alphabet = [0, 1]
 child_length = len(n)
 population_size = 20
 top_percent_size = 5
